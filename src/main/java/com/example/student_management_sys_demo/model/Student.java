@@ -1,8 +1,6 @@
 package com.example.student_management_sys_demo.model;
 
 import jakarta.persistence.*;
-import org.aspectj.bridge.IMessage;
-import org.hibernate.annotations.NotFound;
 
 import java.time.LocalDate;
 
@@ -22,7 +20,7 @@ public class Student {
     // Primary Key with Auto-increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name="first_name", nullable=false, length = 50)
     private String firstName;

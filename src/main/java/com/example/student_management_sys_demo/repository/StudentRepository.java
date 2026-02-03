@@ -41,19 +41,29 @@ public interface StudentRepository extends JpaRepository<Student,Long>
 
     //@Query annotation is used to run custom queries
     //this query finds students by deparment and names sorted
-    @Query("SELECT * FROM students s WHERE s.department= :department ORDER BY s.lastname, s.firstName")
-    List<Student> findByDepartmentOrderByLastNameAsc(@Param("department")String department);
+//    @Query("SELECT * FROM students s WHERE s.department= :department ORDER BY s.lastname, s.firstName")
+//    List<Student> findByDepartmentOrderByLastNameAsc(@Param("department")String department);
+    @Query("SELECT s FROM Student s WHERE s.department = :department ORDER BY s.lastName, s.firstName")
+    List<Student> findByDepartmentSorted(@Param("department") String department);
     //@Param is a query parameter used to bind a method parameter to a named parameter in a manually defined query
 
     // Custom JPQL Query - search students by name or email
-    @Query("SELECT s FROM students s WHERE LOWER(s.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+//    @Query("SELECT s FROM students s WHERE LOWER(s.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+//            "OR LOWER(s.lastName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+//            "OR LOWER(s.email) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+//    List<Student> searchStudents(@Param("keyword") String keyword);
+
+    @Query("SELECT s FROM Student s WHERE LOWER(s.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR LOWER(s.lastName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR LOWER(s.email) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Student> searchStudents(@Param("keyword") String keyword);
 
     //this is a native sql query
-    @Query(value="SELECT * FROM students WHERE department = ?1 AND phoneno IS NOT NULL", nativeQuery = true)
-    List<Student> searchStudentsByPhoneno(String department);
+//    @Query(value="SELECT * FROM students WHERE department = ?1 AND phoneno IS NOT NULL", nativeQuery = true)
+//    List<Student> searchStudentsByPhoneno(String department);
+    @Query(value = "SELECT * FROM students WHERE department = ?1 AND phoneno IS NOT NULL",
+            nativeQuery = true)
+    List<Student> findByDepartmentWithPhone(String department);
 
     //check if a email is already existing (can be used for input validation or registration process to avoid duplication)
     boolean existsByEmail(String email);

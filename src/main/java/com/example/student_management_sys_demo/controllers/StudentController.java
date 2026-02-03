@@ -34,7 +34,7 @@ public class StudentController {
             model.addAttribute("keyword", keyword);
         }
         else if(department != null && !department.trim().isEmpty()){
-            students = studentService.getStudentsByDeparment(department);
+            students = studentService.getStudentsByDepartment(department);
             model.addAttribute("department", department);
         }
         else{
@@ -79,7 +79,7 @@ public class StudentController {
 
     //show form to edit student /students/edit/{id}
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable long id, Model model, RedirectAttributes redirectAttributes) {
+    public String showEditForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         try{
             Student student = studentService.getStudentById(id).orElseThrow( () -> new RuntimeException("Student with id " + id + " not found") );
             model.addAttribute("student", student);
@@ -94,7 +94,7 @@ public class StudentController {
 
     //Update Student post /students/{id}
     @PostMapping("/{id}")
-    public String updateStudent(@PathVariable long id,
+    public String updateStudent(@PathVariable Long id,
                                 @ModelAttribute("student") Student student,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
@@ -118,20 +118,20 @@ public class StudentController {
 
     //view student details /students/{id}
     @GetMapping("/{id}")
-    public String viewStudent(@PathVariable long id, Model model, RedirectAttributes redirectAttributes) {
+    public String viewStudent(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         try{
             Student student = studentService.getStudentById(id).orElseThrow( () -> new RuntimeException("Student with id " + id + " not found") );
             return "student-details";
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/studetns";
+            return "redirect:/students";
         }
     }
 
     //delete student - get /students/delete/{id}
     @GetMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable long id, RedirectAttributes redirectAttributes) {
+    public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try{
             studentService.deleteStudent(id);
             redirectAttributes.addFlashAttribute("successMessage", "Student Deleted Successfully");
