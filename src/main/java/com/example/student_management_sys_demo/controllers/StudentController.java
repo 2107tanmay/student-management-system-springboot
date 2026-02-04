@@ -71,7 +71,7 @@ public class StudentController {
             return "redirect:/students";
         }
         catch(Exception e){
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());;
             model.addAttribute("pageTitle", "Add New Student");
             return "student-form";
         }
@@ -121,6 +121,7 @@ public class StudentController {
     public String viewStudent(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         try{
             Student student = studentService.getStudentById(id).orElseThrow( () -> new RuntimeException("Student with id " + id + " not found") );
+            model.addAttribute("student", student);
             return "student-details";
         }
         catch(Exception e){
