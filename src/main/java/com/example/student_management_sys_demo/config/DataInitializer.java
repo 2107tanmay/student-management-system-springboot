@@ -20,21 +20,24 @@ public class DataInitializer {
                                       UserRepository userRepository,
                                       PasswordEncoder passwordEncoder) {
         return args -> {
-            if (!userRepository.existsByUsername("admin")) {
-                User admin = new User();
-                admin.setUsername("admin");
-                admin.setPassword(passwordEncoder.encode("admin123"));
-                admin.setRole(Role.ADMIN);
-                userRepository.save(admin);
-            }
+//            if (!userRepository.existsByUsername("admin")) {
+//                User admin = new User();
+//                admin.setUsername("admin");
+//                admin.setPassword(passwordEncoder.encode("admin123"));
+//                admin.setRole(Role.ADMIN);
+//                userRepository.save(admin);
+//            }
+//
+//            if (!userRepository.existsByUsername("staff")) {
+//                User staff = new User();
+//                staff.setUsername("staff");
+//                staff.setPassword(passwordEncoder.encode("staff123"));
+//                staff.setRole(Role.STAFF);
+//                userRepository.save(staff);
+//            }
 
-            if (!userRepository.existsByUsername("staff")) {
-                User staff = new User();
-                staff.setUsername("staff");
-                staff.setPassword(passwordEncoder.encode("staff123"));
-                staff.setRole(Role.STAFF);
-                userRepository.save(staff);
-            }
+            ensureSeedUser(userRepository, passwordEncoder, "admin", "admin123", Role.ADMIN);
+            ensureSeedUser(userRepository, passwordEncoder, "staff", "staff123", Role.STAFF);
 
             if (studentRepository.count() == 0) {
                 Student alice = new Student("Alice", "Johnson", "alice.johnson@example.com");
@@ -69,5 +72,36 @@ public class DataInitializer {
                 studentRepository.save(cynthia);
             }
         };
+    }
+
+    private void ensureSeedUser(UserRepository userRepository,
+                                PasswordEncoder passwordEncoder,
+                                String username,
+                                String rawPassword,
+                                Role role) {
+        User user = userRepository.findByUsername(username).orElseGet(User::new);
+        boolean needsSave = user.getId() == null;
+
+        if (needsSave) {
+            user.setUsername(username);
+        }
+
+        if (user.getRole() == null || user.getRole() != role) {
+            user.setRole(role);
+            needsSave = true;
+        }
+
+        if (user.getPassword() == null || !isBcryptHash(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(rawPassword));
+            needsSave = true;
+        }
+
+        if (needsSave) {
+            userRepository.save(user);
+        }
+    }
+
+    private boolean isBcryptHash(String password) {
+        return password.startsWith("$2a$") || password.startsWith("$2b$") || password.startsWith("$2y$");
     }
 }
