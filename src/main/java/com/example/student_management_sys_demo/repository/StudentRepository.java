@@ -10,20 +10,19 @@ import java.util.Optional;
 import javax.swing.text.html.Option;
 
 /**
- * Spring Data JPA Repository for Student entity
- *
- * JpaRepository provides built-in CRUD methods:
- * - save(S entity): Create or Update
- * - findById(ID id): Read by ID
- * - findAll(): Read all
- * - deleteById(ID id): Delete by ID
- * - count(): Count records
- * - existsById(ID id): Check existence
- *
- * You can also define custom query methods using:
- * 1. Method naming conventions (like findByEmail)
- * 2. @Query annotation with JPQL
- * 3. @Query annotation with native SQL
+ Spring Data JPA Repository for Student entity
+ JpaRepository provides built-in CRUD methods:
+ save(S entity): Create or Update
+findById(ID id): Read by ID
+findAll(): Read all
+deleteById(ID id): Delete by ID
+count(): Count records
+existsById(ID id): Check existence
+
+we can also define custom query methods using:
+Method naming conventions (like findByEmail)
+ @Query annotation with JPQL
+@Query annotation with native SQL
  */
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long>

@@ -1,5 +1,6 @@
 package com.example.student_management_sys_demo.controllers;
 
+import com.example.student_management_sys_demo.exceptions.ResourceNotFoundException;
 import com.example.student_management_sys_demo.model.Student;
 import com.example.student_management_sys_demo.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,31 +66,19 @@ public class StudentController {
             return "student-form";
         }
 
-        try{
-            studentService.createStudent(student);
-            redirectAttributes.addFlashAttribute("successMessage", "Student Created Successfully");
-            return "redirect:/students";
-        }
-        catch(Exception e){
-            model.addAttribute("errorMessage", e.getMessage());;
-            model.addAttribute("pageTitle", "Add New Student");
-            return "student-form";
-        }
+        studentService.createStudent(student);
+        redirectAttributes.addFlashAttribute("successMessage", "Student Created Successfully");
+        return "redirect:/students";
     }
 
     //show form to edit student /students/edit/{id}
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        try{
-            Student student = studentService.getStudentById(id).orElseThrow( () -> new RuntimeException("Student with id " + id + " not found") );
-            model.addAttribute("student", student);
-            model.addAttribute("pageTitle", "Edit Student");
-            return "student-form";
-        }
-        catch(Exception e){
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/students";
-        }
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Student student = studentService.getStudentById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student with id " + id + " not found"));
+        model.addAttribute("student", student);
+        model.addAttribute("pageTitle", "Edit Student");
+        return "student-form";
     }
 
     //Update Student post /students/{id}
@@ -104,41 +93,25 @@ public class StudentController {
             return "student-form";
         }
 
-        try{
-            studentService.updateStudent(id, student);
-            redirectAttributes.addFlashAttribute("successMessage", "Student Updated Successfully");
-            return "redirect:/students";
-        }
-        catch(Exception e){
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("pageTitle", "Edit Student");
-            return "student-form";
-        }
+        studentService.updateStudent(id, student);
+        redirectAttributes.addFlashAttribute("successMessage", "Student Updated Successfully");
+        return "redirect:/students";
     }
 
     //view student details /students/{id}
     @GetMapping("/{id}")
-    public String viewStudent(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        try{
-            Student student = studentService.getStudentById(id).orElseThrow( () -> new RuntimeException("Student with id " + id + " not found") );
-            model.addAttribute("student", student);
-            return "student-details";
-        }
-        catch(Exception e){
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/students";
-        }
+    public String viewStudent(@PathVariable Long id, Model model) {
+        Student student = studentService.getStudentById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student with id " + id + " not found"));
+        model.addAttribute("student", student);
+        return "student-details";
     }
 
     //delete student - get /students/delete/{id}
     @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        try{
-            studentService.deleteStudent(id);
-            redirectAttributes.addFlashAttribute("successMessage", "Student Deleted Successfully");
-        } catch(Exception e){
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-        }
+        studentService.deleteStudent(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Student Deleted Successfully");
         return "redirect:/students";
     }
 

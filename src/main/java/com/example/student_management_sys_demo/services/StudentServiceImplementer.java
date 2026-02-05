@@ -6,6 +6,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.student_management_sys_demo.exceptions.DuplicateResourceException;
+import com.example.student_management_sys_demo.exceptions.ResourceNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +36,7 @@ public class StudentServiceImplementer implements StudentService {
 
         // Validate unique email
         if (studentRepository.existsByEmail(student.getEmail())) {
-            throw new RuntimeException("Email already exists: " + student.getEmail());
+            throw new DuplicateResourceException("Email already exists: " + student.getEmail());
         }
 
         // Save using JPA repository
@@ -71,12 +73,12 @@ public class StudentServiceImplementer implements StudentService {
     @Override
     public Student updateStudent(Long id, Student studentDetails) {
         Student student = studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found with id: " + id));
 
         // Check if email is being changed and if new email already exists
         if (!student.getEmail().equals(studentDetails.getEmail())
                 && studentRepository.existsByEmail(studentDetails.getEmail())) {
-            throw new RuntimeException("Email already exists: " + studentDetails.getEmail());
+            throw new DuplicateResourceException("Email already exists: " + studentDetails.getEmail());
         }
 
         // Update fields
@@ -94,7 +96,7 @@ public class StudentServiceImplementer implements StudentService {
     @Override
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new RuntimeException("Student not found with id: " + id);
+            throw new ResourceNotFoundException("Student not found with id: " + id);
         }
         studentRepository.deleteById(id);
     }

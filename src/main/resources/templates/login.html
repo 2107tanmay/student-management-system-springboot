@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 12px;
+            width: 360px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .login-card h1 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+        .login-card p {
+            color: #606770;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .helper {
+            margin-top: 16px;
+            text-align: center;
+        }
+        .helper a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="login-card">
+    <h1>Welcome Back</h1>
+    <p>Sign in to manage student records.</p>
+    <div th:if="${param.error}" style="color: #b00020; margin-bottom: 12px;">
+        Invalid username or password.
+    </div>
+    <div th:if="${param.logout}" style="color: #1b5e20; margin-bottom: 12px;">
+        You have been logged out.
+    </div>
+    <form method="post" th:action="@{/login}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <div class="helper">
+        <a th:href="@{/students}">Return to student list</a>
+    </div>
+</div>
+</body>
+</html>

@@ -17,6 +17,25 @@ import java.time.LocalDate;
 @Table(name="students")
 public class Student {
 
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private StudentProfile profile;
+
+    public StudentProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(StudentProfile profile) {
+        if (profile == null) {
+            if (this.profile != null) {
+                this.profile.setStudent(null);
+            }
+        } else {
+            profile.setStudent(this);
+        }
+        this.profile = profile;
+    }
+
+
     // Primary Key with Auto-increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

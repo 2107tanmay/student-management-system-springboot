@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f7fb;
+            margin: 0;
+            padding: 40px;
+        }
+        .card {
+            max-width: 640px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .status {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0;
+            color: #d32f2f;
+        }
+        .title {
+            margin: 8px 0 0;
+            font-size: 22px;
+        }
+        .message {
+            margin-top: 12px;
+            color: #5f6368;
+            line-height: 1.6;
+        }
+        .meta {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #9aa0a6;
+        }
+        .actions {
+            margin-top: 24px;
+        }
+        .actions a {
+            text-decoration: none;
+            background: #1a73e8;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <p class="status" th:text="${status}">500</p>
+    <h1 class="title" th:text="${error}">Something went wrong</h1>
+    <p class="message" th:text="${message}">Unexpected error.</p>
+    <p class="meta">Time: <span th:text="${timestamp}">now</span></p>
+    <div class="actions">
+        <a th:href="@{/students}">Back to students</a>
+    </div>
+</div>
+</body>
+</html>
