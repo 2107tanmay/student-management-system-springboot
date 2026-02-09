@@ -204,8 +204,10 @@
             <input type="text" name="keyword" th:value="${keyword}"
                    placeholder="🔍 Search by name or email...">
         </form>
+        <a th:href="@{/}" class="btn btn-ghost">🏠 Home</a>
+        <a th:href="@{/dashboard}" class="btn btn-ghost">🧭 API Console</a>
         <form th:action="@{/logout}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <button type="submit" class="btn btn-info">🔓 Logout</button>
         </form>
         <a th:href="@{/students/new}" class="btn btn-primary">➕ Add New Student</a>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/ui.css" />
+</head>
+<body>
+<main class="page">
+    <section class="header">
+        <span class="status" id="status-text">Connecting to backend...</span>
+        <h1>Student Management UI</h1>
+        <p>
+            This page is served by Spring Boot and pulls student data from the backend
+            REST API. Use the search box to filter results instantly.
+        </p>
+    </section>
+
+    <section class="card">
+        <div class="toolbar">
+            <input id="filter-input" type="search" placeholder="Search by name, email, or department" />
+            <button id="refresh-button" type="button">Refresh</button>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <h3 id="total-count">0</h3>
+            <p>Total students returned</p>
+        </div>
+        <div class="stat">
+            <h3 id="department-count">0</h3>
+            <p>Departments represented</p>
+        </div>
+    </section>
+
+    <section class="card">
+        <div id="error-box" class="error" hidden></div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Enrolled</th>
+                </tr>
+                </thead>
+                <tbody id="student-table-body">
+                <tr>
+                    <td colspan="5" class="notice">Loading...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="/js/ui.js"></script>
+</body>
+</html>

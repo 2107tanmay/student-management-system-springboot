@@ -170,7 +170,7 @@
     <p>Set a username and password to access the system.</p>
 
     <form method="post" th:action="@{/register}" th:object="${registrationForm}">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
         <div class="field">
             <label for="username">Username</label>

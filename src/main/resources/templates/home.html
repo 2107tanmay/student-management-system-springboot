@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #0ea5e9;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+            background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 40%, #0b1120 100%);
+            color: #0f172a;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .hero {
+            color: #f8fafc;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 3vw, 3rem);
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #cbd5f5;
+            line-height: 1.6;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #e0e7ff;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(14, 165, 233, 0.12);
+            color: #0369a1;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(14, 165, 233, 0.2);
+        }
+
+        .btn-ghost {
+            background: #f1f5f9;
+            color: #0f172a;
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <section class="hero">
+        <div>
+            <div class="badge">Student Management Suite</div>
+            <h1>Run the full platform from one sleek hub.</h1>
+            <p>
+                Access the student-facing UI, explore API endpoints for Postman, and monitor the backend
+                in a single place. Use the quick links below to jump into the experience.
+            </p>
+        </div>
+        <div class="hero-card">
+            <h2>Quick Start</h2>
+            <p>
+                Open the UI to manage students or head to the backend console to grab
+                API examples and authentication tips.
+            </p>
+            <div class="actions" style="margin-top: 16px;">
+                <a class="btn btn-primary" th:href="@{/students}">Open Student UI</a>
+                <a class="btn btn-secondary" th:href="@{/dashboard}">Backend Console</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h2>Student UI</h2>
+            <p>Browse the roster, manage student records, and keep contact details in sync.</p>
+            <div class="actions">
+                <a class="btn btn-primary" th:href="@{/students}">Go to Students</a>
+                <a class="btn btn-ghost" th:href="@{/students/new}">Add Student</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Authentication</h2>
+            <p>Create a new account or sign in to manage student records.</p>
+            <div class="actions">
+                <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
+                <a class="btn btn-ghost" th:href="@{/register}">Register</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Backend API Console</h2>
+            <p>Explore Postman-ready endpoints for auth, courses, attendance, and admin workflows.</p>
+            <div class="actions">
+                <a class="btn btn-secondary" th:href="@{/dashboard}">Open Console</a>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
