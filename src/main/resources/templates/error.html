@@ -4,38 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #4f46e5;
-            --muted: #6b7280;
-        }
         body {
-            font-family: "Inter", "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 40%, #0b1120 100%);
+            font-family: Arial, sans-serif;
+            background: #f6f7fb;
             margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0f172a;
+            padding: 40px;
         }
         .card {
             max-width: 640px;
-            width: 100%;
+            margin: 0 auto;
             background: #ffffff;
-            border-radius: 20px;
-            padding: 28px 32px;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .status {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 700;
             margin: 0;
-            color: #ef4444;
+            color: #d32f2f;
         }
         .title {
             margin: 8px 0 0;
@@ -43,27 +31,24 @@
         }
         .message {
             margin-top: 12px;
-            color: var(--muted);
+            color: #5f6368;
             line-height: 1.6;
         }
         .meta {
             margin-top: 16px;
             font-size: 14px;
-            color: #94a3b8;
+            color: #9aa0a6;
         }
         .actions {
             margin-top: 24px;
         }
         .actions a {
             text-decoration: none;
-            background: var(--primary);
+            background: #1a73e8;
             color: white;
-            padding: 12px 18px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: inline-block;
         }
     </style>
 </head>
