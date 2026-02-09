@@ -4,63 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f7fb;
-            margin: 0;
-            padding: 40px;
-        }
-        .card {
-            max-width: 640px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px 28px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        .status {
-            font-size: 48px;
-            font-weight: 700;
-            margin: 0;
-            color: #d32f2f;
-        }
-        .title {
-            margin: 8px 0 0;
-            font-size: 22px;
-        }
-        .message {
-            margin-top: 12px;
-            color: #5f6368;
-            line-height: 1.6;
-        }
-        .meta {
-            margin-top: 16px;
-            font-size: 14px;
-            color: #9aa0a6;
-        }
-        .actions {
-            margin-top: 24px;
-        }
-        .actions a {
-            text-decoration: none;
-            background: #1a73e8;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 6px;
-            display: inline-block;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
-<body>
-<div class="card">
-    <p class="status" th:text="${status}">500</p>
-    <h1 class="title" th:text="${error}">Something went wrong</h1>
-    <p class="message" th:text="${message}">Unexpected error.</p>
-    <p class="meta">Time: <span th:text="${timestamp}">now</span></p>
-    <div class="actions">
-        <a th:href="@{/students}">Back to students</a>
-    </div>
+<body class="app">
+<div class="container">
+    <section class="card">
+        <div class="card-title">
+            <h1>Error</h1>
+            <span class="badge" th:text="${status}">500</span>
+        </div>
+        <p class="help-text" th:text="${error}">Something went wrong</p>
+        <p th:text="${message}">Unexpected error.</p>
+        <p class="help-text">Time: <span th:text="${timestamp}">now</span></p>
+        <div class="toolbar mt-16">
+            <a th:href="@{/students}" class="btn btn-primary">Back to students</a>
+            <a th:href="@{/}" class="btn btn-secondary">Return home</a>
+        </div>
+    </section>
 </div>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/dashboard", "/login", "/register", "/error", "/students/**", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/dashboard", "/login", "/register", "/error", "/students/**", "/ui/**", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/api/v1/auth/**", "/api/v1/public/**").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/teacher/**").hasRole("TEACHER")

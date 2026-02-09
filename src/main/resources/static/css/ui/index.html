@@ -7,17 +7,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/ui.css" />
+    <link rel="stylesheet" href="/ui/ui.css" />
 </head>
 <body>
 <main class="page">
     <section class="header">
-        <span class="status" id="status-text">Connecting to backend...</span>
-        <h1>Student Management UI</h1>
+        <span class="badge" id="status-text">Connecting to backend...</span>
+        <h1>Public Student Directory</h1>
         <p>
             This page is served by Spring Boot and pulls student data from the backend
             REST API. Use the search box to filter results instantly.
         </p>
+        <p class="notice">Last refreshed at <span id="updated-at">--:--</span></p>
     </section>
 
     <section class="card">
@@ -48,12 +49,13 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Department</th>
+                    <th>Phone</th>
                     <th>Enrolled</th>
                 </tr>
                 </thead>
                 <tbody id="student-table-body">
                 <tr>
-                    <td colspan="5" class="notice">Loading...</td>
+                    <td colspan="6" class="notice">Loading...</td>
                 </tr>
                 </tbody>
             </table>
@@ -61,6 +63,6 @@
     </section>
 </main>
 
-<script src="/js/ui.js"></script>
+<script src="/ui/ui.js"></script>
 </body>
 </html>

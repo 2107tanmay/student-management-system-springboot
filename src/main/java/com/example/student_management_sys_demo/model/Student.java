@@ -1,6 +1,7 @@
 package com.example.student_management_sys_demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -53,21 +54,31 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "First name is required.")
+    @Size(max = 50, message = "First name cannot exceed 50 characters.")
     @Column(name="first_name", nullable=false, length = 50)
     private String firstName;
 
+    @NotBlank(message = "Last name is required.")
+    @Size(max = 50, message = "Last name cannot exceed 50 characters.")
     @Column(name="last_name", nullable = false, length = 50)
     private String lastName;
 
+    @NotBlank(message = "Email is required.")
+    @Email(message = "Enter a valid email address.")
+    @Size(max = 100, message = "Email cannot exceed 100 characters.")
     @Column(name ="email", unique = true, length = 100)
     private String email;
 
+    @Past(message = "Date of birth must be in the past.")
     @Column(name = "dob")
     private LocalDate dob;
 
+    @Pattern(regexp = "^$|^[0-9+()\\-\\s]{7,20}$", message = "Phone number must be 7-20 digits and may include +, -, or spaces.")
     @Column(name="phoneno", length = 20)
     private String phoneno;
 
+    @Size(max = 50, message = "Department cannot exceed 50 characters.")
     @Column(name="department", length =50)
     private String department;
 

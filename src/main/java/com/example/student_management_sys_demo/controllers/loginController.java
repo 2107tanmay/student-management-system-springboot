@@ -61,6 +61,6 @@ public class loginController {
 
     @GetMapping("/")
     public String root() {
-        return "home";
+        return "redirect:/login";
     }
 }

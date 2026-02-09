@@ -3,6 +3,7 @@ package com.example.student_management_sys_demo.controllers;
 import com.example.student_management_sys_demo.exceptions.ResourceNotFoundException;
 import com.example.student_management_sys_demo.model.Student;
 import com.example.student_management_sys_demo.services.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +57,7 @@ public class StudentController {
 
     //create new student /students
     @PostMapping
-    public String createStudent( @ModelAttribute("student") Student student,
+    public String createStudent(@Valid @ModelAttribute("student") Student student,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Model model){
@@ -84,7 +85,7 @@ public class StudentController {
     //Update Student post /students/{id}
     @PostMapping("/{id}")
     public String updateStudent(@PathVariable Long id,
-                                @ModelAttribute("student") Student student,
+                                @Valid @ModelAttribute("student") Student student,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Model model){
