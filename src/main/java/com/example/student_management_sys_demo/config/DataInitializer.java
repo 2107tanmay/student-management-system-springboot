@@ -37,7 +37,7 @@ public class DataInitializer {
 //            }
 
             ensureSeedUser(userRepository, passwordEncoder, "admin", "admin123", Role.ADMIN);
-            ensureSeedUser(userRepository, passwordEncoder, "staff", "staff123", Role.STAFF);
+            ensureSeedUser(userRepository, passwordEncoder, "teacher", "teacher123", Role.TEACHER);
 
             if (studentRepository.count() == 0) {
                 Student alice = new Student("Alice", "Johnson", "alice.johnson@example.com");

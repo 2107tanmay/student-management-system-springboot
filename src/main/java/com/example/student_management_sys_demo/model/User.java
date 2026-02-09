@@ -3,6 +3,7 @@ package com.example.student_management_sys_demo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -15,11 +16,15 @@ public class User {
         private String username;
 
         @Column(name = "password", nullable = false, length = 200)
+        @JsonIgnore
         private String password;
 
         @Enumerated(EnumType.STRING)
         @Column(name = "role", nullable = false, length = 30)
         private Role role;
+
+        @Column(name = "profile_image_url", length = 255)
+        private String profileImageUrl;
 
         public Long getId() {
             return id;
@@ -51,5 +56,13 @@ public class User {
 
         public void setRole(Role role) {
             this.role = role;
+        }
+
+        public String getProfileImageUrl() {
+            return profileImageUrl;
+        }
+
+        public void setProfileImageUrl(String profileImageUrl) {
+            this.profileImageUrl = profileImageUrl;
         }
 }

@@ -70,4 +70,5 @@ public interface StudentRepository extends JpaRepository<Student,Long>
     //can be used to get count of studentts in a department
     long countByDepartment(String department);
 
+    Optional<Student> findByUserId(Long userId);
 }

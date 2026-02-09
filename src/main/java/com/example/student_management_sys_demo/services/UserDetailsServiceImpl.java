@@ -1,4 +1,5 @@
 package com.example.student_management_sys_demo.services;
+
 import com.example.student_management_sys_demo.model.User;
 import com.example.student_management_sys_demo.repository.UserRepository;
 import java.util.Collections;

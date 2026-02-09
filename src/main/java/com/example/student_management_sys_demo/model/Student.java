@@ -24,6 +24,10 @@ public class Student {
         return profile;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
+
     public void setProfile(StudentProfile profile) {
         if (profile == null) {
             if (this.profile != null) {
@@ -33,6 +37,14 @@ public class Student {
             profile.setStudent(this);
         }
         this.profile = profile;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
